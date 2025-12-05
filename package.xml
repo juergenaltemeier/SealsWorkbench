@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package>
+    <name>SealsWorkbench</name>
+    <description>A parametric workbench for seals and O-Rings (DIN/ISO).</description>
+    <author>Jürgen Altemeier</author>
+    <version>0.0.1</version>
+    <license>LGPL</license>
+    <url>https://github.com/juergenaltemeier/SealsWorkbench</url>
+    <maintainer>Jürgen Altemeier</maintainer>
+</package>

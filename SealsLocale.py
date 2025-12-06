@@ -1,12 +1,27 @@
 # -*- coding: utf-8 -*-
 """
 Lightweight localization utilities for SealsWorkbench.
-Currently supports English and German with an automatic fallback to English.
+Supports English and German with an automatic fallback to English.
 """
 import FreeCAD
+import locale
 
 # Stable language codes we support
 SUPPORTED_LANGS = {"en", "de"}
+
+# Map common FreeCAD language strings to our short codes
+LANG_ALIASES = {
+    "german": "de",
+    "deutsch": "de",
+    "germany": "de",
+    "de_de": "de",
+    "de-de": "de",
+    "english": "en",
+    "en_gb": "en",
+    "en-gb": "en",
+    "en_us": "en",
+    "en-us": "en",
+}
 
 # Basic translation catalog. Keys are plain identifiers so we can reuse them in
 # code and UI without depending on external .ts/.qm files.
@@ -150,24 +165,39 @@ TRANSLATIONS = {
 }
 
 
+def _normalize_lang(raw_value):
+    """Normalize raw FreeCAD language strings to a short code like 'en' or 'de'."""
+    lang = (raw_value or "").strip().lower()
+    if not lang or lang == "default":
+        return ""
+    lang = lang.replace("-", "_")
+    for sep in ("(", "[", ",", ";"):
+        if sep in lang:
+            lang = lang.split(sep, 1)[0].strip()
+    lang = lang.replace(" ", "")
+    return LANG_ALIASES.get(lang, lang)
+
+
 def _detect_language():
     """Return a short language code like 'en' or 'de' with fallback to 'en'."""
     try:
         params = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/General")
-        lang = params.GetString("Language", "")
-        if not lang:
-            lang = params.GetString("locale", "")
+        raw_lang = params.GetString("Language", "") or params.GetString("locale", "")
     except Exception:
-        lang = ""
+        raw_lang = ""
 
+    lang = _normalize_lang(raw_lang)
     if not lang:
-        return "en"
+        try:
+            sys_locale = locale.getdefaultlocale()[0] or ""
+            lang = _normalize_lang(sys_locale)
+        except Exception:
+            lang = ""
 
-    lang = lang.lower()
-    # Typical FreeCAD values: "English", "de", "de_DE", "en_GB"
-    if lang.startswith("de"):
+    # Typical FreeCAD values: "German", "German (Germany)", "de", "de_DE", "en_GB"
+    if lang.startswith("de") or "german" in lang or "deutsch" in lang:
         return "de"
-    if lang.startswith("en"):
+    if lang.startswith("en") or "english" in lang:
         return "en"
     if len(lang) == 2 and lang in SUPPORTED_LANGS:
         return lang

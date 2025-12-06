@@ -1,4 +1,4 @@
-# Datei: D:\SealsWorkbench\Init.py
+# Init.py for SealsWorkbench
 
-# Hier passiert noch keine GUI-Magie, nur Registrierung
+# No GUI initialization here, only module registration if needed.
 print("SealsWorkbench: Initializing module...")

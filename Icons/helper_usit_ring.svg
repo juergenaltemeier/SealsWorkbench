@@ -1,0 +1,28 @@
+<svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #f7f7f8; }
+    .center { stroke: #cfd6de; stroke-width: 1.5; stroke-dasharray: 6 4; fill: none; }
+    .outer { stroke: #1f2a44; stroke-width: 3; fill: none; }
+    .inner { stroke: #f08c42; stroke-width: 4; fill: none; stroke-dasharray: 5 3; }
+    .dim { stroke: #9fb3c8; stroke-width: 2; fill: none; }
+    .dimtext { fill: #1f2a44; font-family: sans-serif; font-size: 16px; }
+    .arrow { fill: #9fb3c8; }
+  </style>
+  <defs>
+    <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" class="arrow"/>
+    </marker>
+  </defs>
+  <rect width="320" height="320" class="bg" rx="12" ry="12"/>
+  <circle cx="160" cy="160" r="110" class="outer"/>
+  <circle cx="160" cy="160" r="64" class="inner"/>
+  <line x1="160" y1="24" x2="160" y2="296" class="center"/>
+  <line x1="50" y1="236" x2="270" y2="236" class="dim" marker-end="url(#arrow-end)" marker-start="url(#arrow-end)"/>
+  <text x="160" y="230" text-anchor="middle" class="dimtext">d2</text>
+  <line x1="118" y1="204" x2="202" y2="204" class="dim" marker-end="url(#arrow-end)" marker-start="url(#arrow-end)"/>
+  <text x="160" y="198" text-anchor="middle" class="dimtext">d1</text>
+  <line x1="46" y1="104" x2="46" y2="216" class="dim" marker-end="url(#arrow-end)" marker-start="url(#arrow-end)"/>
+  <text x="38" y="164" text-anchor="end" class="dimtext">s</text>
+  <line x1="274" y1="104" x2="274" y2="176" class="dim" marker-end="url(#arrow-end)" marker-start="url(#arrow-end)"/>
+  <text x="282" y="146" text-anchor="start" class="dimtext">h</text>
+</svg>

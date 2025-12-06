@@ -7,6 +7,8 @@ __pycache__/
 # --- VS Code ---
 .vscode/
 *.code-workspace
+gemini.md
+GEMINI_SUMMARY.md
 
 # --- OS Specific ---
 .DS_Store
@@ -19,4 +21,5 @@ Thumbs.db
 
 # --- Private Dokumentation (User Request) ---
 README_private.md
-GEMINI*.md
+install_workbench.py
+/Bilder/*
